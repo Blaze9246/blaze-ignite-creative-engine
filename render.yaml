@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: blaze-ignite-creative-engine
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: GEMINI_API_KEY
+        value: AQ.Ab8RN6Je-1_mE8Lo-Znot9bLsbQDA0snk1rv6xstxwDfmT3baw
+      - key: ARK_BASE_URL
+        value: https://ark.ap-southeast.bytepluses.com/api/v3
+      - key: ARK_API_KEY
+        value: e2b79890-d16a-41f2-88bb-7c8d1dd19516
+      - key: DEEPSEEK_MODEL
+        value: deepseek-v3-1-250821
+      - key: NODE_ENV
+        value: production
