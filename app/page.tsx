@@ -198,8 +198,15 @@ export default function Page() {
 
           {step >= 2 ? (
             <Panel title="Products">
-              <div className="text-xs text-blaze-muted mb-3">Select up to {inputs.maxProducts} products. Manual add/upload comes next build.</div>
-              <div className="space-y-3 max-h-[360px] overflow-auto pr-1">
+              <div className="text-xs text-blaze-muted mb-3">Select up to {inputs.maxProducts} products. Add manual product if needed.</div>
+              
+              {/* Manual Product Add */}
+              <ManualProductAdd onAdd={(product) => {
+                setSuggestedProducts([...suggestedProducts, product]);
+                toggleProduct(product.id);
+              }} />
+              
+              <div className="space-y-3 max-h-[360px] overflow-auto pr-1 mt-4">
                 {suggestedProducts.map((p) => {
                   const checked = selectedProductIds.includes(p.id);
                   const disabled = !checked && selectedProductIds.length >= inputs.maxProducts;
@@ -211,6 +218,11 @@ export default function Page() {
                         <div className="font-medium text-sm">{p.title}</div>
                         <Pill>{checked ? "SELECTED" : disabled ? "LIMIT" : "ADD"}</Pill>
                       </div>
+                      {p.image ? (
+                        <div className="mt-2">
+                          <img src={p.image} alt={p.title} className="w-16 h-16 object-cover rounded-lg" />
+                        </div>
+                      ) : null}
                       {p.description ? <div className="text-xs text-blaze-muted mt-1 line-clamp-2">{p.description}</div> : null}
                     </button>
                   );
@@ -397,6 +409,65 @@ function OutputView() {
           <div className="text-blaze-muted">Pro tips:</div>
           <ul className="list-disc ml-5">{output.google_pmax_pack.pro_tips.map((t, i) => <li key={i}>{t}</li>)}</ul>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function ManualProductAdd({ onAdd }: { onAdd: (product: any) => void }) {
+  const [title, setTitle] = useState("");
+  const [url, setUrl] = useState("");
+  const [image, setImage] = useState("");
+  const [showForm, setShowForm] = useState(false);
+
+  if (!showForm) {
+    return (
+      <Button variant="ghost" onClick={() => setShowForm(true)}>
+        + Add Manual Product
+      </Button>
+    );
+  }
+
+  return (
+    <div className="rounded-xl border border-blaze-line bg-blaze-panel2 p-3 space-y-3">
+      <div className="text-sm font-medium">Add Manual Product</div>
+      <Input 
+        placeholder="Product Title" 
+        value={title} 
+        onChange={(e) => setTitle(e.target.value)} 
+      />
+      <Input 
+        placeholder="Product URL" 
+        value={url} 
+        onChange={(e) => setUrl(e.target.value)} 
+      />
+      <Input 
+        placeholder="Image URL (optional)" 
+        value={image} 
+        onChange={(e) => setImage(e.target.value)} 
+      />
+      <div className="flex gap-2">
+        <Button 
+          onClick={() => {
+            if (title) {
+              onAdd({
+                id: `manual_${Date.now()}`,
+                title,
+                url: url || "",
+                image: image || undefined,
+                description: "Manual product"
+              });
+              setTitle("");
+              setUrl("");
+              setImage("");
+              setShowForm(false);
+            }
+          }}
+          disabled={!title}
+        >
+          Add Product
+        </Button>
+        <Button variant="ghost" onClick={() => setShowForm(false)}>Cancel</Button>
       </div>
     </div>
   );
