@@ -29,6 +29,8 @@ const promoTypes: { value: PromoType; label: string }[] = [
 ];
 
 const providers: { value: ImageProvider; label: string }[] = [
+  { value: "nanobanana2", label: "Nano Banana 2" },
+  { value: "nanobananaPro", label: "Nano Banana Pro" },
   { value: "seedream", label: "Seedream 4.5" }
 ];
 
