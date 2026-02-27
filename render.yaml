@@ -13,5 +13,11 @@ services:
         value: e2b79890-d16a-41f2-88bb-7c8d1dd19516
       - key: DEEPSEEK_MODEL
         value: deepseek-v3-1-250821
+      - key: SEEDREAM_API_KEY
+        value: ec0ae943-7257-4ca8-8759-b84c5d4b9f30
+      - key: SEEDREAM_BASE_URL
+        value: https://ark.ap-southeast.bytepluses.com/api/v3
+      - key: SEEDREAM_MODEL
+        value: doubao-seedream-4-5-251128
       - key: NODE_ENV
         value: production
