@@ -5,8 +5,6 @@ services:
     buildCommand: npm install && npm run build
     startCommand: npm run start
     envVars:
-      - key: GEMINI_API_KEY
-        value: AQ.Ab8RN6Je-1_mE8Lo-Znot9bLsbQDA0snk1rv6xstxwDfmT3baw
       - key: ARK_BASE_URL
         value: https://ark.ap-southeast.bytepluses.com/api/v3
       - key: ARK_API_KEY

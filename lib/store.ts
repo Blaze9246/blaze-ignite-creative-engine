@@ -29,7 +29,7 @@ export const useEngine = create<State>((set, get) => ({
     promotion: { type: "PERCENT", value: 10, currency: "ZAR" },
     storeUrl: "",
     maxProducts: 2,
-    imageProvider: "nanobanana2",
+    imageProvider: "seedream",
     includeUGC: true,
     includePROMO: true
   },
